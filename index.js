@@ -13,8 +13,8 @@ const { fetchMyIP, fetchCoordsByIP} = require("./iss");
 
 fetchCoordsByIP("24.80.162.169", (error, data) => {
   if (error) {
-    console.log("Geo-coordinates could not be fetched!", error);
+    console.log(error);
     return;
   }
-  console.log("It worked! Geo-coordinates: ", data);
+  console.log(data);
 });
