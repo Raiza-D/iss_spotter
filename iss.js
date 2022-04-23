@@ -37,10 +37,13 @@ const fetchCoordsByIP = function(ip, callback) {
       return;
     }
     if (response.statusCode !== 200) {
-      callback(Error(`Status code ${response.statusCode} when fetching geo-coordinates: ${body}`), null);
+      const msg = `Status code ${response.statusCode} when fetching geo-coordinates for IP. Response: ${body}`;
+      callback(Error(msg), null);
+      return;
     }
 
     const { latitude, longitude } = JSON.parse(body);
+    
     callback(null, { latitude, longitude });
    });
 };
