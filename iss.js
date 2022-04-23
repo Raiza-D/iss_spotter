@@ -99,62 +99,25 @@ const fetchISSFlyOverTimes = function(coords, callback) {
  */
 
 const nextISSTimesForMyLocation = function(callback) {
-  request("https://api.ipify.org?format=json", (error, response, body) => {
+
+  fetchMyIP((error, ip) => {
     if (error) {
-      callback(error, null);
-      return;
+      return callback(error, null);
     }
 
-    if (response.statusCode !== 200) {
-      callback(
-        Error(`Status code ${response.statusCode} when fetching IP: ${body}`),
-        null
-      );
-      return;
-    }
-    const ip = JSON.parse(body).ip;
-    callback(null, ip);
-  });
+    fetchCoordsByIP(ip, (error, loc) => {
+      if (error) {
+        return callback(error, null);
+      }
 
-  const URL = "https://freegeoip.app/json/" + ip;
-  request(URL, (error, response, body) => {
-    if (error) {
-      callback(error, null);
-      return;
-    }
-    if (response.statusCode !== 200) {
-      callback(
-        Error(
-          `Status code ${response.statusCode} when fetching geo-coordinates for IP: ${body}`
-        ),
-        null
-      );
-      return;
-    }
+      fetchISSFlyOverTimes(loc, (error, nextPasses) => {
+        if (error) {
+          return callback(error, null);
+        }
 
-    const { latitude, longitude } = JSON.parse(body);
-
-    callback(null, { latitude, longitude });
-  });
-
-  const url = `https://iss-pass.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}`;
-
-  request(url, (error, response, body) => {
-    if (error) {
-      callback(error, null);
-      return;
-    }
-    if (response.statusCode !== 200) {
-      callback(
-        Error(
-          `Status code ${response.statusCode} when fetching ISS pass times: ${body}`
-        ),
-        null
-      );
-      return;
-    }
-    const passes = JSON.parse(body).response;
-    callback(null, passes);
+        callback(null, nextPasses);
+      });
+    });
   });
 };
 
