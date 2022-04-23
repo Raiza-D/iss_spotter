@@ -1,6 +1,6 @@
-// Requires and will run our main fetch function
+// Will run our main fetch function within iss.js
 
-const { fetchCoordsByIP} = require("./iss");
+const { fetchISSFlyOverTimes } = require("./iss");
 
 // Temporary code:
 // fetchMyIP((error, ip) => {
@@ -11,12 +11,19 @@ const { fetchCoordsByIP} = require("./iss");
 //   console.log("It worked! Returned IP:", ip);
 // });
 
+// Temporary code:
+// fetchCoordsByIP("24.80.162.169", (error, coordinates) => {
+//   if (error) {
+//     console.log("It didn't work!", error);
+//     return;
+//   }
+//   console.log("It worked! Returned coordinates:", coordinates);
+// });
 
-fetchCoordsByIP("24.80.162.169", (error, coordinates) => {
+fetchISSFlyOverTimes({ latitude: "49.2635", longitude: "-122.9331" }, (error, flyOverTimes) => {
   if (error) {
     console.log("It didn't work!", error);
-    return;
   }
-  console.log("It worked! Returned coordinates:", coordinates);
+  console.log("It worked! ISS fly over times for your coordinates are: ", flyOverTimes);
+  
 });
-
