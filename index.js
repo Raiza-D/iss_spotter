@@ -1,6 +1,6 @@
 // Will run our main fetch function within iss.js
 
-const { fetchISSFlyOverTimes } = require("./iss");
+const { nextISSTimesForMyLocation } = require("./iss");
 
 // Temporary code:
 // fetchMyIP((error, ip) => {
@@ -29,7 +29,14 @@ const { fetchISSFlyOverTimes } = require("./iss");
 // fetchISSFlyOverTimes(exampleCoords, (error, passTimes) => {
 //   if (error) {
 //     console.log("It didn't work!", error);
-//   } else {
-//     console.log("It worked! ISS fly over times for your coordinates are: ", passTimes);
+//     return;
 //   }
+//   console.log("It worked! ISS fly over times for your coordinates are: ", passTimes);
 // });
+
+nextISSTimesForMyLocation((error, passTimes) => {
+  if (error) {
+    return console.log("It didn't work!", error);
+  }
+  console.log("It worked!", passTimes);
+});
