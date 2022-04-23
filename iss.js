@@ -27,6 +27,18 @@ const fetchMyIP = function(callback) {
   });
 };
 
+
+/*
+ * Makes a single API request to retrieve the lat/lng for a given IPv4 address.
+ * Input:
+ *   - The ip (ipv4) address (string)
+ *   - A callback (to pass back an error or the lat/lng object)
+ * Returns (via Callback):
+ *   - An error, if any (nullable)
+ *   - The lat and lng as an object (null if error). Example:
+ *     { latitude: '49.27670', longitude: '-123.13000' }
+ */
+
 // Invalid URL: https://freegeoip.app/json/invalidIPHere
 // Valid URL: https://freegeoip.app/json/
 
@@ -38,8 +50,7 @@ const fetchCoordsByIP = function(ip, callback) {
       return;
     }
     if (response.statusCode !== 200) {
-      const msg = `Status code ${response.statusCode} when fetching geo-coordinates for IP. Response: ${body}`;
-      callback(Error(msg), null);
+      callback(Error(`Status code ${response.statusCode} when fetching geo-coordinates for IP: ${body}`), null);
       return;
     }
 
