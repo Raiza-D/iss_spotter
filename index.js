@@ -24,12 +24,12 @@ const { fetchISSFlyOverTimes } = require("./iss");
 // Temporary code:
 // Valid coords: { latitude: "49.2635", longitude: "-122.9331" }
 // Invalid coords: { latitude: "-450.2635", longitude: "-122.9331" }
-const exampleCoords = { latitude: "-450.2635", longitude: "-122.9331" };
+// const exampleCoords = { latitude: "-450.2635", longitude: "-122.9331" };
 
-fetchISSFlyOverTimes(exampleCoords, (error, passTimes) => {
-  if (error) {
-    console.log("It didn't work!", error);
-  } else {
-    console.log("It worked! ISS fly over times for your coordinates are: ", passTimes);
-  }
-});
+// fetchISSFlyOverTimes(exampleCoords, (error, passTimes) => {
+//   if (error) {
+//     console.log("It didn't work!", error);
+//   } else {
+//     console.log("It worked! ISS fly over times for your coordinates are: ", passTimes);
+//   }
+// });
