@@ -27,4 +27,16 @@ const fetchMyIP = function(callback) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = function(ip, callback) {
+  const URL = "https://freegeoip.app/json/" + ip;
+  request(URL, (error, response, body) => {
+    if (error) {
+      callback(`Attention:${error}`, null);
+      return;
+    }
+    const { latitude, longitude } = JSON.parse(body);
+    callback(null, { latitude, longitude });
+   });
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
