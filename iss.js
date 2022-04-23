@@ -27,13 +27,19 @@ const fetchMyIP = function(callback) {
   });
 };
 
+// https://freegeoip.app/json/
+
 const fetchCoordsByIP = function(ip, callback) {
-  const URL = "https://freegeoip.app/json/" + ip;
+  const URL = "https://freegeoip.app/json/invalidIPHere" + ip;
   request(URL, (error, response, body) => {
     if (error) {
       callback(`Attention:${error}`, null);
       return;
     }
+    if (response.statusCode !== 200) {
+      callback(Error(`Status code ${response.statusCode} when fetching geo-coordinates: ${body}`), null);
+    }
+
     const { latitude, longitude } = JSON.parse(body);
     callback(null, { latitude, longitude });
    });
