@@ -12,5 +12,11 @@ const printPassTimes = function (passTimes) {
 nextISSTimesForMyLocation()
   .then((passTimes) => {
     printPassTimes(passTimes);
+  })
+  .catch((error) => {
+    console.log("It didn't work: ", error.message);
   });
+
+/* Anytime promises are used, ALWAYS include catch method below the promise.
+These two go-hand in hand. Can't have one without the other. */
 
