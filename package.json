@@ -1,7 +1,7 @@
 {
   "name": "iss_spotter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Program to fetch International Space Station pass times for current location. Makes use of IP then geo-coordinates.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/Raiza-D/iss_spotter.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Raiza De Guzman",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Raiza-D/iss_spotter/issues"
